@@ -53,7 +53,7 @@ export default {
     },
     methods:
     {
-       async addCat() {
+       addCat() {
              let data = {
                    name: this.catdata.name
                }

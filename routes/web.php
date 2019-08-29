@@ -5,7 +5,7 @@ Route::get('/',function () {
    
 });
 
-Route::get('/post/get-data','PostController@getPosts');
+Route::get('/post','PostController@getPosts');
 
 Auth::routes();
 

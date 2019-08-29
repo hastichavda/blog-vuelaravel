@@ -45,6 +45,10 @@
                                 <strong> Description:</strong>  {{PostData.description}}
                             </div>
                             <hr>
+                            <div>
+                                <strong>Category:</strong>{{PostData.category_id}}
+                            </div>
+                            <hr>
                                 <a :href="'/adminhome/'+PostData.id+'/edit'" class="btn btn-primary btnedit">Edit</a>
                                 <button @click="deletePost(PostData.id,index)" class="btn btn-danger">Delete</button>
                         </li>
@@ -74,8 +78,8 @@ export default {
             PostData: {
                 title: '',
                 description: '',
-                category_id:''
-            }
+                category_id:'',
+            },
         }
     },
  
@@ -105,7 +109,7 @@ export default {
                 })
                 .catch((err) => console.error(err));
         },
-
+    
         deletePost(id,index) {
             axios.delete('adminhome/' + id)
             .then((res) => {

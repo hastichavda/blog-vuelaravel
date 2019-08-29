@@ -11,17 +11,20 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
+        $posts = Post::orderBy('id','DESC')->get();
         return view('admin.adminhome',compact('posts'));
        
     }
     
     public function getPosts()
     {
-        $posts = Post::all();
-        return view('admin.showallpost', compact('posts'));
+        $posts= Post::all();
+        $categories= Category::all();
+        $posts = Post::orderBy('id','DESC')->get();
+
+        return view('admin.showallpost', compact('posts', 'categories'));
     }
 
-  
     public function create()
     {
      
@@ -32,7 +35,7 @@ class PostController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
-            'description' => 'required|min:500'
+            'description' => 'required|min:2'
         ]);
         $PostData= new Post;
         $PostData->title = $request->title;

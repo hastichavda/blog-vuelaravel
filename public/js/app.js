@@ -1931,8 +1931,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       list: [],
       PostData: {
         title: '',
-        description: '',
-        category_id: ''
+        description: ''
       }
     };
   },
@@ -1950,14 +1949,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       var data = {
         title: this.PostData.title,
-        description: this.PostData.description,
-        category_id: this.PostData.category_id
+        description: this.PostData.description
       };
       console.log(data);
       axios.post('/adminhome', data).then(function (res) {
         _this.PostData.title = '';
         _this.PostData.description = '';
-        _this.PostData.category_id = '';
 
         _this.list.push(res.data.PostData);
       })["catch"](function (err) {
@@ -39170,7 +39167,7 @@ var render = function() {
                     _c("div", [
                       _c("strong", [_vm._v("Category:")]),
                       _vm._v(
-                        _vm._s(PostData.category_id) +
+                        _vm._s(PostData.category.name) +
                           "\n                        "
                       )
                     ]),

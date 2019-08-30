@@ -46,7 +46,7 @@
                             </div>
                             <hr>
                             <div>
-                                <strong>Category:</strong>{{PostData.category_id}}
+                                <strong>Category:</strong>{{PostData.category.name}}
                             </div>
                             <hr>
                                 <a :href="'/adminhome/'+PostData.id+'/edit'" class="btn btn-primary btnedit">Edit</a>
@@ -78,7 +78,6 @@ export default {
             PostData: {
                 title: '',
                 description: '',
-                category_id:'',
             },
         }
     },
@@ -97,14 +96,12 @@ export default {
             let data = {
                 title: this.PostData.title,
                 description: this.PostData.description,
-                category_id: this.PostData.category_id
             }
             console.log(data);
             axios.post('/adminhome', data)
                 .then((res) => {
                     this.PostData.title = '';
                     this.PostData.description = ''; 
-                    this.PostData.category_id='';
                     this.list.push(res.data.PostData);
                 })
                 .catch((err) => console.error(err));

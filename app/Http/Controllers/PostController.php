@@ -10,8 +10,8 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::all();
-        $posts = Post::orderBy('id','DESC')->get();
+        $posts = Post::with('category')->orderBy('id','DESC')->get();
+        // $categories= Category::all();
         return view('admin.adminhome',compact('posts'));
        
     }
@@ -21,8 +21,7 @@ class PostController extends Controller
         $posts= Post::all();
         $categories= Category::all();
         $posts = Post::orderBy('id','DESC')->get();
-
-        return view('admin.showallpost', compact('posts', 'categories'));
+        return view('welcome', compact('posts', 'categories'));
     }
 
     public function create()

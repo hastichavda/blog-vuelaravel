@@ -134,6 +134,13 @@
               width:45%;
               margin: 0 auto;
           }
+          .post{
+        list-style:none;
+        margin: 10px 0 20px 0;
+    }
+    .category{
+        background: #F3A9C9 ;
+    }
         </style>
     </head>
     <body>
@@ -226,10 +233,49 @@
             </nav>
         </div>
 
-     
-        <div class="card mt-5">
-            <a href="/post" class="btn btn-success">posts</a>
-        </div>
+        <div class="container-fluid row">  
+                <div class="col-sm-8 ">
+                        @foreach ($posts as $post)
+                        <li class="post">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>
+                                        <strong>{{$post->title}}</strong>
+                                    </h4>
+                                </div>
+                                <div class="card-body">
+                                    <p>{{$post->description}}</p>
+                                </div>
+                                <div class="card-footer">
+                                    <h5>
+                                        {{$post->category->name}}
+                                    </h5>
+                                    <small>
+                                        created_at:<i>{{ Carbon\Carbon::parse($post->created_at)->format('d-m-Y')  }}</i>
+                                    </small>
+                                    <button class="btn btn-primary btn-xs pull-right">Read More</button>
+                                </div>
+                            </div>
+                        </li>  
+                        @endforeach
+                </div>
+                <div class=" col-sm-4 mt-2">
+                        <div class=" category ">
+                            <div class="card-header">
+                                <h4><strong>Categories</strong></h4>
+                            </div>
+                            <div class="card-body">
+                                @foreach ($categories as $category)
+                                    <li class="post">
+                                       <a href="">
+                                            {{$category->name}}
+                                       </a>
+                                    </li>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+            </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

@@ -141,11 +141,15 @@
     .category{
         background: #F3A9C9 ;
     }
+    .header1{
+        margin: 0 0 0 0;
+        padding: 0 0 0 0;
+    }
         </style>
     </head>
     <body>
         <div class="main">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light header1">
             <a class="navbar-brand brand " href="{{ url('/home') }}">
                 <img height="35" width="100" src="http://gooyaabitemplates.com/download/Free-Blogger-Templates.png" alt="Live Preview">
             </a>
@@ -165,7 +169,6 @@
                         <a href="" class="item"><i class="fa fa-paperclip icon"></i>by topics</a>
                     </li>
                     <li class="nav-item menu-item">
-                    {{-- <div class="flex-center position-ref full-height"> --}}
                         @if (Route::has('login'))
                             <div class="top-right links">
                                 @auth
@@ -267,7 +270,7 @@
                             <div class="card-body">
                                 @foreach ($categories as $category)
                                     <li class="post">
-                                       <a href="">
+                                       <a href="{{ action('PostController@filterPosts',$category->id )}}">
                                             {{$category->name}}
                                        </a>
                                     </li>

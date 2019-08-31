@@ -1918,6 +1918,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     postdata: {
@@ -1928,10 +1932,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       categoryList: [],
+      category: {
+        name: ''
+      },
       list: [],
       PostData: {
         title: '',
-        description: ''
+        description: '',
+        category_id: ''
       }
     };
   },
@@ -1949,12 +1957,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       var data = {
         title: this.PostData.title,
-        description: this.PostData.description
+        description: this.PostData.description,
+        category_id: this.PostData.category_id
       };
       console.log(data);
       axios.post('/adminhome', data).then(function (res) {
         _this.PostData.title = '';
         _this.PostData.description = '';
+        _this.PostData.category_id = '';
 
         _this.list.push(res.data.PostData);
       })["catch"](function (err) {
@@ -1969,7 +1979,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       })["catch"](function (err) {
         return console.error(err);
       });
-      alert('Are you Sure?');
     },
     fetchCatgories: function () {
       var _fetchCatgories = _asyncToGenerator(
@@ -39044,7 +39053,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "text" },
+                attrs: { type: "text", row: "", col: "60" },
                 domProps: { value: _vm.PostData.description },
                 on: {
                   input: function($event) {
@@ -39168,6 +39177,8 @@ var render = function() {
                       _c("strong", [_vm._v("Category:")]),
                       _vm._v(
                         _vm._s(PostData.category.name) +
+                          "\n                            " +
+                          _vm._s(PostData.category_id) +
                           "\n                        "
                       )
                     ]),

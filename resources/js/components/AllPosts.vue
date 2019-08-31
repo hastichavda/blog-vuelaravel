@@ -12,7 +12,10 @@
                     </div>
                     <div class="form-group">
                         <label for="">Post Description</label>
-                        <textarea  v-model="PostData.description" type="text" class="form-control"></textarea>
+                        <textarea  v-model="PostData.description" 
+                                   type="text" 
+                                   class="form-control" row="" col="60">
+                        </textarea>
                     </div>
                     <div class="form-group">
                         <label for="">Categories</label>
@@ -47,6 +50,7 @@
                             <hr>
                             <div>
                                 <strong>Category:</strong>{{PostData.category.name}}
+                                {{PostData.category_id}}
                             </div>
                             <hr>
                                 <a :href="'/adminhome/'+PostData.id+'/edit'" class="btn btn-primary btnedit">Edit</a>
@@ -74,10 +78,14 @@ export default {
     {
         return{
             categoryList: [],
+            category: {
+                name: ''
+            },
             list: [],
             PostData: {
                 title: '',
                 description: '',
+                category_id:'',
             },
         }
     },
@@ -96,12 +104,14 @@ export default {
             let data = {
                 title: this.PostData.title,
                 description: this.PostData.description,
+                category_id: this.PostData.category_id,
             }
             console.log(data);
             axios.post('/adminhome', data)
                 .then((res) => {
                     this.PostData.title = '';
                     this.PostData.description = ''; 
+                    this.PostData.category_id='';
                     this.list.push(res.data.PostData);
                 })
                 .catch((err) => console.error(err));
@@ -113,7 +123,6 @@ export default {
             this.list.splice(index,1)
             })
             .catch((err) => console.error(err));
-            alert('Are you Sure?');
         },
 
         async fetchCatgories () {

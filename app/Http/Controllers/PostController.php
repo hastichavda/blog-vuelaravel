@@ -10,17 +10,16 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::with('category')->orderBy('id','DESC')->get();
-        // $categories= Category::all();
+        $posts = Post::with('category')->get();
         return view('admin.adminhome',compact('posts'));
        
     }
     
     public function getPosts()
-    {
+    {   
         $posts= Post::all();
         $categories= Category::all();
-        $posts = Post::orderBy('id','DESC')->get();
+        // $posts = Post::orderBy('id','DESC')->get();
         return view('welcome', compact('posts', 'categories'));
     }
 
@@ -41,6 +40,7 @@ class PostController extends Controller
         $PostData->description = $request->description;
         $PostData->category_id = $request->category_id;
         $PostData->save();
+        $PostData->category;
         return response()->json([
             'PostData' => $PostData
         ]);
@@ -67,7 +67,6 @@ class PostController extends Controller
         $PostData->title = $request->title;
         $PostData->description = $request->description;
         $PostData->update();
-
         return response()->json([
             'PostData' => $PostData
         ]); 
@@ -81,4 +80,13 @@ class PostController extends Controller
             'status' => 'Deleted'
         ]);
     }
+
+    public function filterPosts($id) {
+        $posts = Post::with('category')->where('category_id', $id)->get();
+        // return response()->json([
+        //     'posts' => $posts
+        // ]);
+        return view('admin.showPost',compact('posts'));
+    }
+ 
 }

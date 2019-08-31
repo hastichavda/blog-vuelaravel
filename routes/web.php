@@ -3,6 +3,7 @@
 Route::get('/','PostController@getPosts');
 
 Route::get('/post','PostController@getPosts');
+Route::get('/get-post/{id}/','PostController@filterPosts');
 
 Auth::routes();
 

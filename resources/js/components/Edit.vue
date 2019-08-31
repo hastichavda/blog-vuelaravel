@@ -31,7 +31,7 @@ export default {
             list:[],
             formData: {
                 title: '',
-                description: ''
+                description: '',
             }
         }
     },

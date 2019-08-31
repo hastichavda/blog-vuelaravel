@@ -14,7 +14,7 @@
                         <label for="">Post Description</label>
                         <textarea  v-model="PostData.description" 
                                    type="text" 
-                                   class="form-control" row="" col="60">
+                                   class="form-control" rows="5">
                         </textarea>
                     </div>
                     <div class="form-group">
@@ -50,7 +50,7 @@
                             <hr>
                             <div>
                                 <strong>Category:</strong>{{PostData.category.name}}
-                                {{PostData.category_id}}
+                                <!-- {{PostData.category_id}} -->
                             </div>
                             <hr>
                                 <a :href="'/adminhome/'+PostData.id+'/edit'" class="btn btn-primary btnedit">Edit</a>
@@ -78,9 +78,6 @@ export default {
     {
         return{
             categoryList: [],
-            category: {
-                name: ''
-            },
             list: [],
             PostData: {
                 title: '',

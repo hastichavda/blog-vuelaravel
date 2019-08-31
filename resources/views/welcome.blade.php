@@ -3,7 +3,6 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
         <title>Laravel</title>
 
         <!-- Fonts -->
@@ -11,92 +10,91 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         
-
         <!-- Styles -->
         <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
+        html, body {
+            background-color: #fff;
+            color: #636b6f;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 200;
+            height: 100vh;
+            margin: 0;
+        }
 
-            .full-height {
-                height: 100vh;
-            }
+        .full-height {
+            height: 100vh;
+        }
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+        .flex-center {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
 
-            .position-ref {
-                position: relative;
-            }
+        .position-ref {
+            position: relative;
+        }
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+        .top-right {
+            position: absolute;
+            right: 10px;
+            top: 18px;
+        }
 
-            .content {
-                text-align: center;
-            }
+        .content {
+            text-align: center;
+        }
 
-            .title {
-                font-size: 84px;
-            }
+        .title {
+            font-size: 84px;
+        }
 
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
+        .links > a {
+            color: #636b6f;
+            padding: 0 25px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: .1rem;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
 
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-            .menu {
-                margin-left:60%;
-                text-transform:capitalize; 
-                font-size: 15px;    
-                font-family: Georgia, 'Times New Roman', Times, serif;
-             
-            }
-            .menu-item{ 
-                padding: 0 10px 0 10px;
-            }
-            .item{
-                color:#3094db;
-            }
-            .icon{
-                padding: 0 8px 0 1px;
-                font-size:18px;
-            }
-            .logo{
-                width:50px;
-                height: 40px;
-            }
-          .header{
+        .m-b-md {
+            margin-bottom: 30px;
+        }
+        .menu {
+            margin-left:60%;
+            text-transform:capitalize; 
+            font-size: 15px;    
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            
+        }
+        .menu-item{ 
+            padding: 0 10px 0 10px;
+        }
+        .item{
+            color:#3094db;
+        }
+        .icon{
+            padding: 0 8px 0 1px;
+            font-size:18px;
+        }
+        .logo{
+            width:50px;
+            height: 40px;
+        }
+        .header{
             width: 100%;
             padding: 40px 0;
             background-color: #32a7db;
             color:white;
-          }
-          .para{
+        }
+        .para{
             font-size: 16px;
             font-weight: 200;
             color:rgba(255,255,255,0.7);
-          }
-          .title{
+        }
+        .title{
             font-size: 60px;
             color: #fff;
             text-decoration: none;
@@ -104,51 +102,55 @@
             text-shadow: 0 1px 1px #666;
             line-height: 1.1;
             letter-spacing: -3px;
-          }
-          .header2{
-              background: #2196f3;
-			  padding-left: 25%;
-			  color: white;
-			  text-transform:uppercase;
-          }
-          .h2item{
+        }
+        .header2{
+            background: #2196f3;
+            padding-left: 25%;
+            color: white;
+            text-transform:uppercase;
+        }
+        .h2item{
             padding: 15px 20px;
             color:white;
             font-size: 12px;
             text-transform: uppercase;
-          }
-		  .srch{
-			font-size:20px;	
-			  background:#017ab0;
-			 padding: 10px 25px 10px 20px;
-		  }
-		  .icon2{
-			padding-right:20px;
-		  }
-		  .main{
-              overflow: hidden;
-              position:static; 
-          }
-          .component{
-              padding-top:5%;
-              width:45%;
-              margin: 0 auto;
-          }
-          .post{
-        list-style:none;
-        margin: 10px 0 20px 0;
-    }
-    .category{
-        background: #F3A9C9 ;
-    }
-    .header1{
-        margin: 0 0 0 0;
-        padding: 0 0 0 0;
-    }
-        </style>
+        }
+        .srch{
+            font-size:20px;	
+            background:#017ab0;
+            padding: 10px 25px 10px 20px;
+        }
+        .icon2{
+            padding-right:20px;
+        }
+        .main{
+            overflow: hidden;
+            position:static; 
+        }
+        .component{
+            padding-top:5%;
+            width:45%;
+            margin: 0 auto;
+        }
+        .post{
+            list-style:none;
+            margin: 10px 0 20px 0;
+            border-bottom: 1px dotted #ddd;
+        }
+        .category{
+            background: #32A7DB;
+        }
+        .cat-item{
+            color:#32a7db;
+        }
+        .header1{
+            margin: 0 0 0 0;
+            padding: 0 0 0 0;
+        }
+    </style>
     </head>
     <body>
-        <div class="main">
+       <div class="main">
         <nav class="navbar navbar-expand-lg navbar-light bg-light header1">
             <a class="navbar-brand brand " href="{{ url('/home') }}">
                 <img height="35" width="100" src="http://gooyaabitemplates.com/download/Free-Blogger-Templates.png" alt="Live Preview">
@@ -156,7 +158,6 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-    
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav  menu">
                     <li class="nav-item menu-item">
@@ -194,17 +195,13 @@
             </div>
         </nav>
         <div class="header">
-            <div class="">
             <h1 class="text-center title">Earth Pro</h1>      
             <h2 class="text-center para">Earth Pro Blogger Template - PremiumBloggerTemplates.com</h2>
-            </div>    
         </div>
         <nav class="navbar navbar-expand-lg header2">
-            
             <button class="navbar-toggler light" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            
             <div class="collapse navbar-collapse " id="navbarSupportedContent">
                 <ul class="navbar-nav ">
                     <li class="nav-item">
@@ -235,50 +232,49 @@
             </div>
             </nav>
         </div>
-
         <div class="container-fluid row">  
                 <div class="col-sm-8 ">
-                        @foreach ($posts as $post)
-                        <li class="post">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4>
-                                        <strong>{{$post->title}}</strong>
-                                    </h4>
-                                </div>
-                                <div class="card-body">
-                                    <p>{{$post->description}}</p>
-                                </div>
-                                <div class="card-footer">
-                                    <h5>
-                                        {{$post->category->name}}
-                                    </h5>
-                                    <small>
-                                        created_at:<i>{{ Carbon\Carbon::parse($post->created_at)->format('d-m-Y')  }}</i>
-                                    </small>
-                                    <button class="btn btn-primary btn-xs pull-right">Read More</button>
-                                </div>
-                            </div>
-                        </li>  
-                        @endforeach
-                </div>
-                <div class=" col-sm-4 mt-2">
-                        <div class=" category ">
+                    @foreach ($posts as $post)
+                    <li class="post">
+                        <div class="card">
                             <div class="card-header">
-                                <h4><strong>Categories</strong></h4>
+                                <h4>
+                                    <strong>{{$post->title}}</strong>
+                                </h4>
                             </div>
                             <div class="card-body">
-                                @foreach ($categories as $category)
-                                    <li class="post">
-                                       <a href="{{ action('PostController@filterPosts',$category->id )}}">
-                                            {{$category->name}}
-                                       </a>
-                                    </li>
-                                @endforeach
+                                <p>{{$post->description}}</p>
+                            </div>
+                            <div class="card-footer">
+                                <h5>
+                                    {{$post->category->name}}
+                                </h5>
+                                <small>
+                                    created_at:<i>{{ Carbon\Carbon::parse($post->created_at)->format('d-m-Y')  }}</i>
+                                </small>
+                                <a href="{{ action('PostController@readMore',$post->id)}}" class="btn btn-primary btn-xs pull-right">Read More</a>
                             </div>
                         </div>
+                    </li>  
+                    @endforeach
+                </div>
+                <div class=" col-sm-4 mt-2">
+                    <div class="card">
+                        <div class="card-header category">
+                            <h4><strong>Categories</strong></h4>
+                        </div>
+                        <div class="card-body">
+                            @foreach ($categories as $category)
+                                <li class="post">
+                                <a href="{{ action('PostController@filterPosts',$category->id )}}" class="cat-item">
+                                  {{$category->name}}
+                                </a>
+                                </li>
+                            @endforeach
+                        </div>
                     </div>
-            </div>
+                </div>
+        </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

@@ -11,7 +11,16 @@
                 </div>
                 <div class="form-group">
                     <label for="">Post Description</label>
-                    <textarea type="text" v-model="formData.description" class="form-control"></textarea>
+                    <textarea type="text" v-model="formData.description" class="form-control" rows="5"></textarea>
+                </div>
+                <div class="form-group">
+                 <select v-model="formData.category_id" class="btn btn-info cat"  placeholder="Select">
+                    <option v-for="(category,index) in categoryList" 
+                        :value="category.id"
+                        :key="index">
+                        {{category.name}}
+                    </option>
+                </select>
                 </div>
                 <button type="submit" class="btn btn-info" @click="updatePost">Update</button>        
             </form>
@@ -28,10 +37,12 @@ export default {
     },
     data () {
         return {
+            categoryList:[],
             list:[],
             formData: {
                 title: '',
                 description: '',
+                category_id:''
             }
         }
     },
@@ -40,6 +51,8 @@ export default {
         {
             this.formData.title = this.post.title;
             this.formData.description = this.post.description;
+            this.formData.category_id = this.post.category_id;
+              this.fetchCatgories();
         }
     },
     methods: {
@@ -49,6 +62,7 @@ export default {
             if (res.data) {
                this.formData.title = res.data.PostData.title
                this.formData.description = res.data.PostData.description
+               this.formData.category_id = res.data.PostData.category_id
             }
         },
 
@@ -56,8 +70,16 @@ export default {
             let data = {
                 title: this.formData.title,
                 description: this.formData.description,
+                category_id:this.formData.category_id
             }
             let res = await axios.put('/adminhome/' + this.post.id, this.formData)
+        },
+
+          async fetchCatgories () {
+            let res = await axios.get('/category')
+            if (res.data) {
+                this.categoryList = res.data.categories
+            }
         }
     }
 

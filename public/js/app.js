@@ -1932,9 +1932,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       categoryList: [],
-      category: {
-        name: ''
-      },
       list: [],
       PostData: {
         title: '',
@@ -2144,6 +2141,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     post: {
@@ -2153,10 +2159,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
+      categoryList: [],
       list: [],
       formData: {
         title: '',
-        description: ''
+        description: '',
+        category_id: ''
       }
     };
   },
@@ -2164,6 +2172,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     if (this.post) {
       this.formData.title = this.post.title;
       this.formData.description = this.post.description;
+      this.formData.category_id = this.post.category_id;
+      this.fetchCatgories();
     }
   },
   methods: {
@@ -2185,6 +2195,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 if (res.data) {
                   this.formData.title = res.data.PostData.title;
                   this.formData.description = res.data.PostData.description;
+                  this.formData.category_id = res.data.PostData.category_id;
                 }
 
               case 4:
@@ -2212,7 +2223,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 data = {
                   title: this.formData.title,
-                  description: this.formData.description
+                  description: this.formData.description,
+                  category_id: this.formData.category_id
                 };
                 _context2.next = 3;
                 return axios.put('/adminhome/' + this.post.id, this.formData);
@@ -2233,6 +2245,39 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return updatePost;
+    }(),
+    fetchCatgories: function () {
+      var _fetchCatgories = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return axios.get('/category');
+
+              case 2:
+                res = _context3.sent;
+
+                if (res.data) {
+                  this.categoryList = res.data.categories;
+                }
+
+              case 4:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function fetchCatgories() {
+        return _fetchCatgories.apply(this, arguments);
+      }
+
+      return fetchCatgories;
     }()
   }
 });
@@ -39053,7 +39098,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "text", row: "", col: "60" },
+                attrs: { type: "text", rows: "5" },
                 domProps: { value: _vm.PostData.description },
                 on: {
                   input: function($event) {
@@ -39177,9 +39222,7 @@ var render = function() {
                       _c("strong", [_vm._v("Category:")]),
                       _vm._v(
                         _vm._s(PostData.category.name) +
-                          "\n                            " +
-                          _vm._s(PostData.category_id) +
-                          "\n                        "
+                          "\n                            "
                       )
                     ]),
                     _vm._v(" "),
@@ -39416,7 +39459,7 @@ var render = function() {
               }
             ],
             staticClass: "form-control",
-            attrs: { type: "text" },
+            attrs: { type: "text", rows: "5" },
             domProps: { value: _vm.formData.description },
             on: {
               input: function($event) {
@@ -39427,6 +39470,55 @@ var render = function() {
               }
             }
           })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.formData.category_id,
+                  expression: "formData.category_id"
+                }
+              ],
+              staticClass: "btn btn-info cat",
+              attrs: { placeholder: "Select" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.formData,
+                    "category_id",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                }
+              }
+            },
+            _vm._l(_vm.categoryList, function(category, index) {
+              return _c(
+                "option",
+                { key: index, domProps: { value: category.id } },
+                [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(category.name) +
+                      "\n                "
+                  )
+                ]
+              )
+            }),
+            0
+          )
         ]),
         _vm._v(" "),
         _c(

@@ -12,15 +12,6 @@ class PostController extends Controller
     {
         $posts = Post::with('category')->get();
         return view('admin.adminhome',compact('posts'));
-       
-    }
-    
-    public function getPosts()
-    {   
-        $posts= Post::all();
-        $categories= Category::all();
-        // $posts = Post::orderBy('id','DESC')->get();
-        return view('welcome', compact('posts', 'categories'));
     }
 
     public function create()
@@ -28,7 +19,6 @@ class PostController extends Controller
      
     }
 
-  
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -56,19 +46,21 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
-
-        return view('admin.edit', compact('post'));
+        $category = Category::find($id);
+        return view('admin.edit', compact('post','category'));
     }
-
 
     public function update(Request $request, $id)
     {
         $PostData = Post::find($id);
+        $category = Category::find($id);
         $PostData->title = $request->title;
         $PostData->description = $request->description;
+        $PostData->category_id = $request->category_id;
         $PostData->update();
         return response()->json([
-            'PostData' => $PostData
+            'PostData' => $PostData,
+            'category'=> $category
         ]); 
     }
 
@@ -80,13 +72,23 @@ class PostController extends Controller
             'status' => 'Deleted'
         ]);
     }
+     
+    public function getPosts()
+    {   
+        $posts= Post::all();
+        $categories= Category::all();
+        $posts = Post::orderBy('id','DESC')->get();
+        return view('welcome', compact('posts', 'categories'));
+    }
 
     public function filterPosts($id) {
         $posts = Post::with('category')->where('category_id', $id)->get();
-        // return response()->json([
-        //     'posts' => $posts
-        // ]);
         return view('admin.showPost',compact('posts'));
     }
  
+    public function readMore($id)
+    {
+        $posts = Post::where('id',$id)->get();
+        return view('admin.showPost', compact('posts'));
+    }
 }

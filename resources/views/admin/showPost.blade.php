@@ -3,28 +3,38 @@
 @section('content')
 <a  class="btn btn-primary mt-4 mb-5" href="/">Back to Home</a>
 
-@foreach ($posts as $post)
-<li class="post mb-3">
-    <div class="card">
-        <div class="card-header">
-            <h4>
-                <strong>{{$post->title}}</strong>
-            </h4>
+
+@if(count($posts)> 0)
+    @foreach ($posts as $post)
+    <li class="post mb-3">
+        <div class="card">
+            <div class="card-header">
+                <h4>
+                    <strong>{{$post->title}}</strong>
+                </h4>
+            </div>
+            <div class="card-body">
+                <p>{{$post->description}}</p>
+            </div>
+            <div class="card-footer">
+                <h5>
+                    {{$post->category->name}}
+                </h5>
+                <small>
+                    created_at:<i>{{ Carbon\Carbon::parse($post->created_at)->format('d-m-Y')  }}</i>
+                </small>
+            </div>
         </div>
-        <div class="card-body">
-            <p>{{$post->description}}</p>
+    </li>  
+    @endforeach
+    @else
+        <div class="card">
+            <div class="card-header">
+                No Post Yet
+            </div>
         </div>
-        <div class="card-footer">
-            <h5>
-                {{$post->category->name}}
-            </h5>
-            <small>
-                created_at:<i>{{ Carbon\Carbon::parse($post->created_at)->format('d-m-Y')  }}</i>
-            </small>
-        </div>
-    </div>
-</li>  
-@endforeach
+@endif
+ 
 
 
 

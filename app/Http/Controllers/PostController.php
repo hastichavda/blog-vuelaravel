@@ -89,6 +89,6 @@ class PostController extends Controller
     public function readMore($id)
     {
         $posts = Post::where('id',$id)->get();
-        return view('admin.showPost', compact('posts'));
+        return view('admin.displayPost', compact('posts'));
     }
 }

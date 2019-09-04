@@ -245,14 +245,13 @@
                             <div class="card-body">
                                 <p>{{$post->description}}</p>
                             </div>
+                            <small>
+                                created_at:<i>{{ Carbon\Carbon::parse($post->created_at)->format('d-m-Y')  }}</i>
+                            </small>
                             <div class="card-footer">
-                                <h5>
-                                    {{$post->category->name}}
-                                </h5>
-                                <small>
-                                    created_at:<i>{{ Carbon\Carbon::parse($post->created_at)->format('d-m-Y')  }}</i>
-                                </small>
-                                <a href="{{ action('PostController@readMore',$post->id)}}" class="btn btn-primary btn-xs pull-right">Read More</a>
+                                <a href="{{ action('PostController@readMore',$post->id)}}" 
+                                   class="btn btn-primary btn-xs pull-right">
+                                   Read More</a>
                             </div>
                         </div>
                     </li>  

@@ -4,14 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\Category;
+
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::with('category')->get();
-        return view('admin.adminhome',compact('posts'));
+        $posts = Post::with('categories')->get();
+        return view('admin.adminhome',compact('posts','categories'));
     }
 
     public function create()
@@ -23,18 +24,17 @@ class PostController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
-            'description' => 'required|min:2'
+            'description' => 'required'
         ]);
         $PostData= new Post;
         $PostData->title = $request->title;
         $PostData->description = $request->description;
-        $PostData->category_id = $request->category_id;
         $PostData->save();
-        $PostData->category;
+        $PostData->categories()->attach($request->categories);
+        $PostData->categories;
         return response()->json([
             'PostData' => $PostData
         ]);
-     
     }
 
     public function show(Post $post)
@@ -45,22 +45,20 @@ class PostController extends Controller
    
     public function edit($id)
     {
-        $post = Post::find($id);
-        $category = Category::find($id);
-        return view('admin.edit', compact('post','category'));
+        $post = Post::with('categories')->findOrFail($id);
+        // $category = Category::find($id);
+        return view('admin.edit', compact('post'));
     }
 
     public function update(Request $request, $id)
     {
-        $PostData = Post::find($id);
-        $category = Category::find($id);
+        $PostData = Post::with('categories')->findOrFail($id);
         $PostData->title = $request->title;
         $PostData->description = $request->description;
-        $PostData->category_id = $request->category_id;
-        $PostData->update();
+        $PostData->save();
+        $PostData->categories()->sync($request->categories);
         return response()->json([
             'PostData' => $PostData,
-            'category'=> $category
         ]); 
     }
 
@@ -82,8 +80,9 @@ class PostController extends Controller
     }
 
     public function filterPosts($id) {
-        $posts = Post::with('category')->where('category_id', $id)->get();
-        return view('admin.showPost',compact('posts'));
+        $category = Category::find($id);
+        $posts = $category->posts;
+        return view('admin.showPost',compact('posts','category'));
     }
  
     public function readMore($id)

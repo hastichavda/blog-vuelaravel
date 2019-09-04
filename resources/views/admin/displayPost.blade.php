@@ -16,7 +16,7 @@
         </div>
         <div class="card-footer">
             <h5>
-                {{$post->category->name}}
+             
             </h5>
             <small>
                 created_at:<i>{{ Carbon\Carbon::parse($post->created_at)->format('d-m-Y')  }}</i>

@@ -1922,6 +1922,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     postdata: {
@@ -1931,54 +1934,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
+      selectedCategories: [],
       categoryList: [],
       list: [],
       PostData: {
         title: '',
-        description: '',
-        category_id: ''
+        description: ''
       }
     };
   },
   mounted: function mounted() {
     console.log('mounted');
+    this.fetchCategory();
 
     if (this.postdata) {
       this.list = this.postdata;
-      this.fetchCatgories();
     }
   },
   methods: {
-    createPost: function createPost() {
-      var _this = this;
-
-      var data = {
-        title: this.PostData.title,
-        description: this.PostData.description,
-        category_id: this.PostData.category_id
-      };
-      console.log(data);
-      axios.post('/adminhome', data).then(function (res) {
-        _this.PostData.title = '';
-        _this.PostData.description = '';
-        _this.PostData.category_id = '';
-
-        _this.list.push(res.data.PostData);
-      })["catch"](function (err) {
-        return console.error(err);
-      });
-    },
-    deletePost: function deletePost(id, index) {
-      var _this2 = this;
-
-      axios["delete"]('adminhome/' + id).then(function (res) {
-        _this2.list.splice(index, 1);
-      })["catch"](function (err) {
-        return console.error(err);
-      });
-    },
-    fetchCatgories: function () {
-      var _fetchCatgories = _asyncToGenerator(
+    fetchCategory: function () {
+      var _fetchCategory = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var res;
@@ -2004,12 +1979,40 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee, this);
       }));
 
-      function fetchCatgories() {
-        return _fetchCatgories.apply(this, arguments);
+      function fetchCategory() {
+        return _fetchCategory.apply(this, arguments);
       }
 
-      return fetchCatgories;
-    }()
+      return fetchCategory;
+    }(),
+    createPost: function createPost() {
+      var _this = this;
+
+      var data = {
+        title: this.PostData.title,
+        description: this.PostData.description,
+        categories: this.selectedCategories
+      };
+      console.log(data);
+      var res = axios.post('/adminhome', data).then(function (res) {
+        _this.PostData.title = '';
+        _this.PostData.description = '';
+        _this.PostData.categoryList = '';
+
+        _this.list.push(res.data.PostData);
+      })["catch"](function (err) {
+        return console.error(err);
+      });
+    },
+    deletePost: function deletePost(id, index) {
+      var _this2 = this;
+
+      axios["delete"]('adminhome/' + id).then(function (res) {
+        _this2.list.splice(index, 1);
+      })["catch"](function (err) {
+        return console.error(err);
+      });
+    }
   }
 });
 
@@ -2150,6 +2153,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     post: {
@@ -2159,12 +2172,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
+      selectedCategories: [],
       categoryList: [],
       list: [],
       formData: {
         title: '',
-        description: '',
-        category_id: ''
+        description: ''
       }
     };
   },
@@ -2172,7 +2185,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     if (this.post) {
       this.formData.title = this.post.title;
       this.formData.description = this.post.description;
-      this.formData.category_id = this.post.category_id;
+      this.formData.categories = this.post.categories;
       this.fetchCatgories();
     }
   },
@@ -2195,7 +2208,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 if (res.data) {
                   this.formData.title = res.data.PostData.title;
                   this.formData.description = res.data.PostData.description;
-                  this.formData.category_id = res.data.PostData.category_id;
+                  this.formData.categories = res.data.PostData.categories;
                 }
 
               case 4:
@@ -2215,7 +2228,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     updatePost: function () {
       var _updatePost = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(id) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(e) {
         var data, res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
@@ -2224,10 +2237,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 data = {
                   title: this.formData.title,
                   description: this.formData.description,
-                  category_id: this.formData.category_id
+                  categories: this.selectedCategories
                 };
                 _context2.next = 3;
-                return axios.put('/adminhome/' + this.post.id, this.formData);
+                return axios.put('/adminhome/' + this.post.id, data);
 
               case 3:
                 res = _context2.sent;
@@ -39112,6 +39125,11 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group" }, [
+              _vm._v(
+                "\n                    " +
+                  _vm._s(_vm.selectedCategories) +
+                  "\n                    "
+              ),
               _c("label", { attrs: { for: "" } }, [_vm._v("Categories")]),
               _vm._v(" "),
               _c(
@@ -39121,12 +39139,11 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.PostData.category_id,
-                      expression: "PostData.category_id"
+                      value: _vm.selectedCategories,
+                      expression: "selectedCategories"
                     }
                   ],
-                  staticClass: "btn btn-info cat",
-                  attrs: { placeholder: "Select" },
+                  attrs: { multiple: "" },
                   on: {
                     change: function($event) {
                       var $$selectedVal = Array.prototype.filter
@@ -39137,13 +39154,9 @@ var render = function() {
                           var val = "_value" in o ? o._value : o.value
                           return val
                         })
-                      _vm.$set(
-                        _vm.PostData,
-                        "category_id",
-                        $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      )
+                      _vm.selectedCategories = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
                     }
                   }
                 },
@@ -39218,13 +39231,23 @@ var render = function() {
                     _vm._v(" "),
                     _c("hr"),
                     _vm._v(" "),
-                    _c("div", [
-                      _c("strong", [_vm._v("Category:")]),
-                      _vm._v(
-                        _vm._s(PostData.category.name) +
-                          "\n                            "
-                      )
-                    ]),
+                    _c(
+                      "div",
+                      [
+                        _c("strong", [_vm._v("Category:")]),
+                        _vm._v(" "),
+                        _vm._l(PostData.categories, function(category, index) {
+                          return _c("div", { key: index }, [
+                            _vm._v(
+                              "\n                                " +
+                                _vm._s(category.name) +
+                                "\n                            "
+                            )
+                          ])
+                        })
+                      ],
+                      2
+                    ),
                     _vm._v(" "),
                     _c("hr"),
                     _vm._v(" "),
@@ -39419,118 +39442,152 @@ var render = function() {
     _vm._m(0),
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
-      _c("form", [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "" } }, [_vm._v("Post Title")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.formData.title,
-                expression: "formData.title"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text" },
-            domProps: { value: _vm.formData.title },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.formData, "title", $event.target.value)
-              }
+      _c(
+        "form",
+        {
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.updatePost($event)
             }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "" } }, [_vm._v("Post Description")]),
-          _vm._v(" "),
-          _c("textarea", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.formData.description,
-                expression: "formData.description"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text", rows: "5" },
-            domProps: { value: _vm.formData.description },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.formData, "description", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c(
-            "select",
-            {
+          }
+        },
+        [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "" } }, [_vm._v("Post Title")]),
+            _vm._v(" "),
+            _c("input", {
               directives: [
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.formData.category_id,
-                  expression: "formData.category_id"
+                  value: _vm.formData.title,
+                  expression: "formData.title"
                 }
               ],
-              staticClass: "btn btn-info cat",
-              attrs: { placeholder: "Select" },
+              staticClass: "form-control",
+              attrs: { type: "text" },
+              domProps: { value: _vm.formData.title },
               on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.$set(
-                    _vm.formData,
-                    "category_id",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                  )
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.formData, "title", $event.target.value)
                 }
               }
-            },
-            _vm._l(_vm.categoryList, function(category, index) {
-              return _c(
-                "option",
-                { key: index, domProps: { value: category.id } },
-                [
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "" } }, [_vm._v("Post Description")]),
+            _vm._v(" "),
+            _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.formData.description,
+                  expression: "formData.description"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", rows: "5" },
+              domProps: { value: _vm.formData.description },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.formData, "description", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "form-group" },
+            [
+              _c("label", { attrs: { for: "" } }, [_vm._v("category:")]),
+              _vm._v(" "),
+              _vm._l(_vm.formData.categories, function(category, index) {
+                return _c("div", { key: index }, [
                   _vm._v(
-                    "\n                    " +
+                    "\n                                " +
                       _vm._s(category.name) +
                       "\n                "
                   )
-                ]
-              )
-            }),
-            0
+                ])
+              })
+            ],
+            2
+          ),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _vm._v(
+              "\n                    " +
+                _vm._s(_vm.selectedCategories) +
+                "\n                    "
+            ),
+            _c("label", { attrs: { for: "" } }, [_vm._v("Categories")]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.selectedCategories,
+                    expression: "selectedCategories"
+                  }
+                ],
+                attrs: { multiple: "" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.selectedCategories = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              _vm._l(_vm.categoryList, function(category, index) {
+                return _c(
+                  "option",
+                  { key: index, domProps: { value: category.id } },
+                  [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(category.name) +
+                        "\n                        "
+                    )
+                  ]
+                )
+              }),
+              0
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "button",
+            { staticClass: "btn btn-info", attrs: { type: "submit" } },
+            [_vm._v("Update")]
           )
-        ]),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-info",
-            attrs: { type: "submit" },
-            on: { click: _vm.updatePost }
-          },
-          [_vm._v("Update")]
-        )
-      ])
+        ]
+      )
     ])
   ])
 }
@@ -52148,8 +52205,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\laragon\www\final-blog\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\laragon\www\final-blog\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\laragon\www\blog-vuelaravel\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\laragon\www\blog-vuelaravel\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

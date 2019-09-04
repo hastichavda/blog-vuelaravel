@@ -18,14 +18,15 @@
                         </textarea>
                     </div>
                     <div class="form-group">
+                        {{ selectedCategories}}
                         <label for="">Categories</label>
-                        <select v-model="PostData.category_id" class="btn btn-info cat"  placeholder="Select">
+                        <select v-model="selectedCategories" multiple>
                             <option v-for="(category,index) in categoryList" 
                                 :value="category.id"
                                 :key="index">
                                 {{category.name}}
                             </option>
-                        </select>
+                        </select>                     
                     </div>
                     <hr>
                     <button type="submit" class="btn btn-success">Add Post</button>
@@ -49,8 +50,10 @@
                             </div>
                             <hr>
                             <div>
-                                <strong>Category:</strong>{{PostData.category.name}}
-                                <!-- {{PostData.category_id}} -->
+                                <strong>Category:</strong>
+                                <div v-for="(category, index) in PostData.categories" :key="index">
+                                    {{ category.name}}
+                                </div>
                             </div>
                             <hr>
                                 <a :href="'/adminhome/'+PostData.id+'/edit'" class="btn btn-primary btnedit">Edit</a>
@@ -77,12 +80,12 @@ export default {
     data()
     {
         return{
+            selectedCategories: [],
             categoryList: [],
             list: [],
             PostData: {
                 title: '',
                 description: '',
-                category_id:'',
             },
         }
     },
@@ -90,25 +93,33 @@ export default {
     mounted()
     {
         console.log('mounted');
+        this.fetchCategory()
         if(this.postdata)
         {
             this.list = this.postdata
-            this.fetchCatgories()
         }
     },
     methods: {
+        async fetchCategory () {
+            let res = await axios.get('/category')
+
+            if (res.data) {
+                this.categoryList = res.data.categories
+            }
+        },
+     
         createPost() {
             let data = {
                 title: this.PostData.title,
                 description: this.PostData.description,
-                category_id: this.PostData.category_id,
+                categories: this.selectedCategories
             }
             console.log(data);
-            axios.post('/adminhome', data)
+            let res = axios.post('/adminhome', data)
                 .then((res) => {
                     this.PostData.title = '';
                     this.PostData.description = ''; 
-                    this.PostData.category_id='';
+                    this.PostData.categoryList='';
                     this.list.push(res.data.PostData);
                 })
                 .catch((err) => console.error(err));
@@ -122,12 +133,6 @@ export default {
             .catch((err) => console.error(err));
         },
 
-        async fetchCatgories () {
-            let res = await axios.get('/category')
-            if (res.data) {
-                this.categoryList = res.data.categories
-            }
-        }
     }
 }
 </script>
